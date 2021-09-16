@@ -81,6 +81,47 @@
             <td>1.90</td>
         </tr>
     </table>
+    <hr>
+    <h1>Graph Matchings</h1>
+    <h3>Bipartite Graph Check</h3>
+<blockquote>
+                A Bipartite graph (or bigraph) is a graph whose vertices can be divided into two disjoint and independent sets.
+There exists a theorem which claims that a graph is bipartite if and only if all its cycles have even length.A graph is bipartite if and only if it does not contain an odd cycle.A graph is bipartite if and only if it is 2-colorable, (i.e. its chromatic number is less than or equal to 2).Any bipartite graph consisting of ‘n’ vertices can have at most (1/4) x n^2 edges.The spectrum of a graph is symmetric if and only if it is a bipartite graph.
+               
+               <p> <a href="https://en.wikipedia.org/wiki/Bipartite_graph">Link to source file</a>
+            </blockquote>
+            
+           <pre>
+            int n;
+            vector<vector<int>> adj;
+            vector<int> side(n, -1);
+            bool is_bipartite = true;
+            queue<int> q;
+            for (int st = 0; st < n; ++st)
+            {
+            if (side[st] == -1)
+            {
+            q.push(st);
+            side[st] = 0;
+            while (!q.empty()) {
+            int v = q.front();
+            q.pop();
+            for (int u : adj[v]) {
+            if (side[u] == -1) {
+            side[u] = side[v] ^ 1;
+            q.push(u);
+            } else {
+            is_bipartite &= side[u] != side[v];
+            }
+            }
+            }
+            }
+            }
+
+            cout << (is_bipartite ? "YES" : "NO") << endl;
+            </pre>
+       <p> <a href="https://cp-algorithms.com/graph/bipartite-check.html">Link to code reference link</a>
+ 
 </body>
 </html>
 
